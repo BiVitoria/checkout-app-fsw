@@ -10,7 +10,7 @@ interface RestaurantPageProps {
 
 const RestaurantPage = async ({ params }: RestaurantPageProps) => {
   const { slug } = await params;
-  const restaurant = await db.restaurant.findFirst({ where: { slug } });
+  const restaurant = await db.restaurant.findUnique({ where: { slug } });
   if (!restaurant) {
     return notFound();
   }
@@ -38,12 +38,16 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           imageAlt="Comer aqui"
           imageUrl="/hmbg.png"
           option="DINE_IN"
+          buttonHref={""}
+          slug={slug}
         />
         <ConsumptionMethodOption
           buttonText="Para Levar"
           imageAlt="Para levar"
           imageUrl="/sacola.png"
           option="TAKEAWAY"
+          buttonHref={""}
+          slug={slug}
         />
       </div>
     </div>
